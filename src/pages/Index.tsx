@@ -6,6 +6,7 @@ import FilterPanel from '@/components/FilterPanel';
 import Header from '@/components/Header';
 import { Recipe } from '@/types/recipe';
 import recipeData from '@/data/recipes.json';
+import { UtensilsCrossed } from 'lucide-react';
 
 const Index: React.FC = () => {
   // State for search and filters
@@ -48,17 +49,21 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2 text-center font-playfair">Discover Delicious Recipes</h1>
-          <p className="text-center text-muted-foreground mb-6">Find the perfect recipe for any occasion</p>
+      <main className="container py-12">
+        <div className="mb-12 max-w-3xl mx-auto text-center">
+          <div className="flex justify-center mb-4">
+            <UtensilsCrossed className="h-12 w-12 text-recipe-primary" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center font-playfair">Discover Delicious Recipes</h1>
+          <p className="text-center text-muted-foreground text-lg mb-8">Find the perfect recipe for any occasion from our curated collection</p>
           <div className="max-w-lg mx-auto">
             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           </div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <aside className="lg:col-span-1 p-4 bg-white rounded-lg shadow-sm border">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <aside className="lg:col-span-1 p-6 bg-white rounded-xl shadow-sm border border-recipe-muted sticky top-28 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
+            <h2 className="text-xl font-playfair font-semibold mb-6">Filter Recipes</h2>
             <FilterPanel 
               recipes={recipes}
               selectedCuisines={selectedCuisines}
@@ -78,8 +83,8 @@ const Index: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-center">
-                <p className="text-xl font-medium mb-2">No recipes found</p>
+              <div className="flex flex-col items-center justify-center h-64 text-center p-8 bg-white rounded-xl border border-recipe-muted">
+                <p className="text-xl font-medium mb-2 font-playfair">No recipes found</p>
                 <p className="text-muted-foreground">Try adjusting your search or filters</p>
               </div>
             )}

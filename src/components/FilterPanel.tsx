@@ -4,6 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Recipe } from '@/types/recipe';
+import { Separator } from '@/components/ui/separator';
 
 interface FilterPanelProps {
   recipes: Recipe[];
@@ -57,42 +58,58 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair">Cuisine</h3>
-        <div className="space-y-2">
+        <h3 className="text-lg font-semibold mb-4 font-playfair text-recipe-dark">Cuisine</h3>
+        <div className="space-y-3">
           {uniqueCuisines.map(cuisine => (
-            <div key={cuisine} className="flex items-center space-x-2">
+            <div key={cuisine} className="flex items-center space-x-3 group">
               <Checkbox 
                 id={`cuisine-${cuisine}`} 
                 checked={selectedCuisines.includes(cuisine)}
                 onCheckedChange={() => handleCuisineChange(cuisine)}
+                className="border-recipe-muted data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
               />
-              <Label htmlFor={`cuisine-${cuisine}`} className="cursor-pointer">{cuisine}</Label>
+              <Label 
+                htmlFor={`cuisine-${cuisine}`} 
+                className="cursor-pointer group-hover:text-recipe-primary transition-colors"
+              >
+                {cuisine}
+              </Label>
             </div>
           ))}
         </div>
       </div>
       
+      <Separator className="bg-recipe-muted/50" />
+      
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair">Tags</h3>
-        <div className="space-y-2">
+        <h3 className="text-lg font-semibold mb-4 font-playfair text-recipe-dark">Tags</h3>
+        <div className="space-y-3">
           {uniqueTags.map(tag => (
-            <div key={tag} className="flex items-center space-x-2">
+            <div key={tag} className="flex items-center space-x-3 group">
               <Checkbox 
                 id={`tag-${tag}`} 
                 checked={selectedTags.includes(tag)}
                 onCheckedChange={() => handleTagChange(tag)}
+                className="border-recipe-muted data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
               />
-              <Label htmlFor={`tag-${tag}`} className="cursor-pointer">{tag}</Label>
+              <Label 
+                htmlFor={`tag-${tag}`} 
+                className="cursor-pointer group-hover:text-recipe-primary transition-colors"
+              >
+                {tag}
+              </Label>
             </div>
           ))}
         </div>
       </div>
       
+      <Separator className="bg-recipe-muted/50" />
+      
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair">Prep Time</h3>
-        <div className="space-y-6">
+        <h3 className="text-lg font-semibold mb-4 font-playfair text-recipe-dark">Prep Time</h3>
+        <div className="space-y-6 px-2">
           <Slider 
             defaultValue={[highestPrepTime]} 
             max={highestPrepTime} 
@@ -102,7 +119,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             className="w-full"
           />
           <div className="flex justify-between">
-            <span>≤ {maxPrepTime} min</span>
+            <span className="font-medium text-recipe-primary">≤ {maxPrepTime} minutes</span>
           </div>
         </div>
       </div>
