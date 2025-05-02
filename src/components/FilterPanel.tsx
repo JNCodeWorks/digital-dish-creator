@@ -64,12 +64,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         <div className="space-y-3">
           {uniqueCuisines.map(cuisine => (
             <div key={cuisine} className="flex items-center space-x-3 group">
-              <Checkbox 
-                id={`cuisine-${cuisine}`} 
-                checked={selectedCuisines.includes(cuisine)}
-                onCheckedChange={() => handleCuisineChange(cuisine)}
-                className="border-recipe-muted data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
-              />
+              <div className="relative flex items-center">
+                <Checkbox 
+                  id={`cuisine-${cuisine}`} 
+                  checked={selectedCuisines.includes(cuisine)}
+                  onCheckedChange={() => handleCuisineChange(cuisine)}
+                  className="border-recipe-primary border-2 bg-white h-5 w-5 rounded data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
+                />
+              </div>
               <Label 
                 htmlFor={`cuisine-${cuisine}`} 
                 className="cursor-pointer group-hover:text-recipe-primary transition-colors"
@@ -88,12 +90,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         <div className="space-y-3">
           {uniqueTags.map(tag => (
             <div key={tag} className="flex items-center space-x-3 group">
-              <Checkbox 
-                id={`tag-${tag}`} 
-                checked={selectedTags.includes(tag)}
-                onCheckedChange={() => handleTagChange(tag)}
-                className="border-recipe-muted data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
-              />
+              <div className="relative flex items-center">
+                <Checkbox 
+                  id={`tag-${tag}`} 
+                  checked={selectedTags.includes(tag)}
+                  onCheckedChange={() => handleTagChange(tag)}
+                  className="border-recipe-primary border-2 bg-white h-5 w-5 rounded data-[state=checked]:bg-recipe-primary data-[state=checked]:border-recipe-primary"
+                />
+              </div>
               <Label 
                 htmlFor={`tag-${tag}`} 
                 className="cursor-pointer group-hover:text-recipe-primary transition-colors"

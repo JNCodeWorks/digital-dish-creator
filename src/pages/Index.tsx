@@ -49,18 +49,25 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-12">
-        <div className="mb-12 max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-4">
-            <UtensilsCrossed className="h-12 w-12 text-recipe-primary" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center font-playfair">Discover Delicious Recipes</h1>
-          <p className="text-center text-muted-foreground text-lg mb-8">Find the perfect recipe for any occasion from our curated collection</p>
-          <div className="max-w-lg mx-auto">
-            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {/* Banner Section */}
+      <div className="w-full bg-gradient-to-r from-recipe-dark via-recipe-primary to-orange-400 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1556909172-8c2f041fca1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1300&q=80')] bg-cover bg-center mix-blend-overlay"></div>
+        <div className="container py-16 md:py-24 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white font-playfair drop-shadow-md">
+              Culinary Collection
+            </h1>
+            <p className="text-white/90 text-xl mb-8 max-w-2xl mx-auto">
+              Discover delicious recipes from around the world, perfectly crafted for every occasion and taste.
+            </p>
+            <div className="max-w-lg mx-auto bg-white/10 p-2 rounded-xl backdrop-blur-md">
+              <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            </div>
           </div>
         </div>
-        
+      </div>
+      
+      <main className="container py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <aside className="lg:col-span-1 p-6 bg-white rounded-xl shadow-sm border border-recipe-muted sticky top-28 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
             <h2 className="text-xl font-playfair font-semibold mb-6">Filter Recipes</h2>
