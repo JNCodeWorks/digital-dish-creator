@@ -2,7 +2,7 @@
 import React from 'react';
 import { Recipe } from '@/types/recipe';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Chef, UtensilsCrossed } from 'lucide-react';
+import { Clock, ChefHat, UtensilsCrossed } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 interface RecipeDetailProps {
@@ -59,7 +59,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-recipe-muted">
           <div className="flex items-center gap-2 mb-6">
-            <Chef className="h-6 w-6 text-recipe-primary" />
+            <ChefHat className="h-6 w-6 text-recipe-primary" />
             <h2 className="text-2xl font-bold font-playfair">Instructions</h2>
           </div>
           <ol className="space-y-6">

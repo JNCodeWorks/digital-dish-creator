@@ -6,7 +6,7 @@ import RecipeDetailComponent from '@/components/RecipeDetail';
 import { Recipe } from '@/types/recipe';
 import recipeData from '@/data/recipes.json';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Chef } from 'lucide-react';
+import { ArrowLeft, ChefHat } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const RecipeDetailPage: React.FC = () => {
@@ -23,7 +23,7 @@ const RecipeDetailPage: React.FC = () => {
         <Header />
         <main className="container py-12">
           <div className="text-center max-w-md mx-auto bg-white p-8 rounded-xl shadow-md border border-recipe-muted">
-            <Chef className="h-12 w-12 text-recipe-primary mx-auto mb-4 opacity-50" />
+            <ChefHat className="h-12 w-12 text-recipe-primary mx-auto mb-4 opacity-50" />
             <h1 className="text-2xl font-bold mb-4 font-playfair">Recipe not found</h1>
             <p className="text-muted-foreground mb-6">The recipe you're looking for doesn't seem to exist.</p>
             <Link to="/">
