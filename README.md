@@ -1,73 +1,108 @@
-# Welcome to your Lovable project
 
-## Project info
+# Recipe Application
 
-**URL**: https://lovable.dev/projects/529998cf-c641-47d1-8def-795d19c0038d
+A beautiful, responsive recipe application built with React, React Router, and Tailwind CSS. This application allows users to browse recipes, search by title or ingredients, and filter by cuisine, tags, and preparation time.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Browse a collection of delicious recipes
+- Search recipes by title or ingredients
+- Filter recipes by cuisine, tags, and preparation time
+- View detailed recipe information
+- Responsive design for all screen sizes
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/529998cf-c641-47d1-8def-795d19c0038d) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js (version 14 or higher)
+- npm or yarn
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone the repository
+```bash
+git clone <repository-url>
 ```
 
-**Edit a file directly in GitHub**
+2. Navigate to the project directory
+```bash
+cd recipe-application
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-**Use GitHub Codespaces**
+4. Start the development server
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+5. Open your browser and navigate to `http://localhost:8080`
 
-## What technologies are used for this project?
+## Project Structure
 
-This project is built with:
+```
+/src
+  /components
+    RecipeCard.tsx       # Card component for displaying recipe previews
+    RecipeDetail.tsx     # Component for displaying full recipe details
+    SearchBar.tsx        # Search input component
+    FilterPanel.tsx      # Component for filtering recipes
+    Header.tsx           # Header component for navigation
+  /data
+    recipes.json         # Recipe data
+  /pages
+    Index.tsx            # Home page component
+    RecipeDetail.tsx     # Recipe detail page component
+    NotFound.tsx         # 404 page component
+  /types
+    recipe.ts            # TypeScript types for recipes
+  App.tsx                # Main application component
+  index.css              # Global styles
+  main.tsx               # Application entry point
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Adding New Recipes
 
-## How can I deploy this project?
+To add new recipes to the application, edit the `src/data/recipes.json` file. Each recipe object should have the following structure:
 
-Simply open [Lovable](https://lovable.dev/projects/529998cf-c641-47d1-8def-795d19c0038d) and click on Share -> Publish.
+```json
+{
+  "id": "unique-recipe-id",
+  "title": "Recipe Title",
+  "image": "image-url",
+  "ingredients": [
+    "Ingredient 1",
+    "Ingredient 2"
+  ],
+  "steps": [
+    "Step 1",
+    "Step 2"
+  ],
+  "cuisine": "Cuisine Type",
+  "tags": [
+    "Tag1",
+    "Tag2"
+  ],
+  "prepTime": 30
+}
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Adding New Filters
 
-Yes, you can!
+To add new filter types:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Update the `FilterPanel.tsx` component to include the new filter type
+2. Add the corresponding state variables in the `Index.tsx` component
+3. Update the filtering logic in the `useMemo` hook in the `Index.tsx` component
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## License
+
+This project is licensed under the MIT License.
