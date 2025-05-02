@@ -1,20 +1,83 @@
 
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import RecipeDetailComponent from '@/components/RecipeDetail';
 import { Recipe } from '@/types/recipe';
-import recipeData from '@/data/recipes.json';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ChefHat } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, ChefHat, Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const RecipeDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const recipes = recipeData as Recipe[];
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
   
-  // Find the recipe with the matching ID
-  const recipe = recipes.find(r => r.id === id);
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        setLoading(true);
+        
+        const { data, error } = await supabase
+          .from('recipes')
+          .select('*')
+          .eq('id', id)
+          .single();
+        
+        if (error) {
+          throw error;
+        }
+        
+        if (data) {
+          // Transform the data to match our Recipe type
+          const transformedRecipe: Recipe = {
+            id: data.id,
+            title: data.title,
+            image: data.image,
+            ingredients: data.ingredients,
+            steps: data.steps,
+            cuisine: data.cuisine,
+            tags: data.tags,
+            prepTime: data.prep_time,
+            author: data.author || undefined,
+            createdAt: data.created_at || undefined
+          };
+          
+          setRecipe(transformedRecipe);
+        }
+      } catch (error) {
+        console.error('Error fetching recipe:', error);
+        toast({
+          title: "Failed to load recipe",
+          description: "Please try again later",
+          variant: "destructive"
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (id) {
+      fetchRecipe();
+    }
+  }, [id, toast]);
+
+  // If loading, show a loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="container py-12">
+          <div className="flex flex-col items-center justify-center h-64">
+            <Loader2 className="h-10 w-10 animate-spin text-recipe-primary mb-4" />
+            <p className="text-muted-foreground">Loading recipe...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   // If no recipe is found, show an error message
   if (!recipe) {

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import RecipeDetail from "./pages/RecipeDetail";
 import AddRecipe from "./pages/AddRecipe";
 import NotFound from "./pages/NotFound";
+import { useMigration } from "./scripts/useMigration";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient({
@@ -20,6 +21,21 @@ const queryClient = new QueryClient({
   },
 });
 
+// Migration wrapper component
+const AppContent = () => {
+  // This will run the migration automatically when the app loads
+  useMigration();
+  
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/recipes/:id" element={<RecipeDetail />} />
+      <Route path="/add-recipe" element={<AddRecipe />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 const App: React.FC = () => {
   return (
     <React.StrictMode>
@@ -28,12 +44,7 @@ const App: React.FC = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/recipes/:id" element={<RecipeDetail />} />
-              <Route path="/add-recipe" element={<AddRecipe />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AppContent />
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
