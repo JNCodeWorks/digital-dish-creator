@@ -8,4 +8,6 @@ export interface Recipe {
   cuisine: string;
   tags: string[];
   prepTime: number;
+  author?: string;
+  createdAt?: string;
 }
