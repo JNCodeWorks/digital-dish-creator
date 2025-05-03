@@ -30,9 +30,10 @@ export const migrateRecipes = async () => {
     
     console.log(`Starting migration of ${allRecipes.length} recipes...`);
     
-    // Transform recipes to match database schema
+    // Transform recipes to match database schema and generate UUIDs
     const recipesForDb = allRecipes.map(recipe => ({
-      id: recipe.id,
+      // Generate a UUID for each recipe rather than using the string ID
+      // The database will generate a UUID automatically
       title: recipe.title,
       image: recipe.image,
       ingredients: recipe.ingredients,

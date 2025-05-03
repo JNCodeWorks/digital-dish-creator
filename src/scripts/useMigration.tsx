@@ -6,6 +6,7 @@ import { migrateRecipes } from './migrateRecipes';
 export function useMigration() {
   const [migrationComplete, setMigrationComplete] = useState(false);
   const [migrationInProgress, setMigrationInProgress] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -21,18 +22,32 @@ export function useMigration() {
         });
       } catch (error) {
         console.error('Migration failed:', error);
-        toast({
-          title: "Data loading issue",
-          description: "There was a problem loading the recipes",
-          variant: "destructive",
-        });
+        
+        // Only show toast on first attempt or final retry
+        if (retryCount === 0 || retryCount >= 2) {
+          toast({
+            title: "Data loading issue",
+            description: "There was a problem loading the recipes. Please refresh the page to try again.",
+            variant: "destructive",
+            duration: 5000,
+          });
+        }
+        
+        // Retry up to 2 times with a delay
+        if (retryCount < 2) {
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+          }, 2000);
+        }
       } finally {
         setMigrationInProgress(false);
       }
     };
 
-    runMigration();
-  }, [toast]);
+    if (!migrationComplete && !migrationInProgress) {
+      runMigration();
+    }
+  }, [toast, migrationComplete, migrationInProgress, retryCount]);
 
   return { migrationComplete, migrationInProgress };
 }
