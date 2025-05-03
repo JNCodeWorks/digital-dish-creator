@@ -2,7 +2,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, UtensilsCrossed } from 'lucide-react';
+import { 
+  PlusCircle, 
+  UtensilsCrossed, 
+  BookmarkCheck, 
+  ShoppingCart, 
+  Moon, 
+  Sun
+} from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Header: React.FC = () => {
   return (
@@ -15,12 +24,36 @@ const Header: React.FC = () => {
           </span>
         </Link>
         
-        <Link to="/add-recipe">
-          <Button className="bg-recipe-primary hover:bg-recipe-primary/90 text-white font-medium transition-all shadow-md hover:shadow-lg">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Add Recipe
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          <ThemeToggle className="hidden sm:flex" />
+          
+          <Link to="/favorites" className="hidden sm:flex">
+            <Button 
+              variant="ghost" 
+              className="text-recipe-dark hover:text-recipe-primary hover:bg-recipe-muted"
+            >
+              <BookmarkCheck className="mr-2 h-4 w-4" />
+              Favorites
+            </Button>
+          </Link>
+          
+          <Link to="/shopping-list" className="hidden sm:flex">
+            <Button 
+              variant="ghost" 
+              className="text-recipe-dark hover:text-recipe-primary hover:bg-recipe-muted"
+            >
+              <ShoppingCart className="mr-2 h-4 w-4" />
+              Shopping List
+            </Button>
+          </Link>
+          
+          <Link to="/add-recipe">
+            <Button className="bg-recipe-primary hover:bg-recipe-primary/90 text-white font-medium transition-all shadow-md hover:shadow-lg">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Add Recipe
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );

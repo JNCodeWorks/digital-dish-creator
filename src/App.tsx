@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import RecipeDetail from "./pages/RecipeDetail";
 import AddRecipe from "./pages/AddRecipe";
 import NotFound from "./pages/NotFound";
+import ShoppingList from "./pages/ShoppingList";
+import Favorites from "./pages/Favorites";
 import { useMigration } from "./scripts/useMigration";
 
 // Create a new QueryClient instance
@@ -31,6 +33,8 @@ const AppContent = () => {
       <Route path="/" element={<Index />} />
       <Route path="/recipes/:id" element={<RecipeDetail />} />
       <Route path="/add-recipe" element={<AddRecipe />} />
+      <Route path="/favorites" element={<Favorites />} />
+      <Route path="/shopping-list" element={<ShoppingList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

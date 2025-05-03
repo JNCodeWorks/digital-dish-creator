@@ -8,12 +8,14 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ChefHat, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useRecipes } from '@/hooks/useRecipes';
 
 const RecipeDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { recipes } = useRecipes();
   
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -106,7 +108,7 @@ const RecipeDetailPage: React.FC = () => {
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to all recipes
         </Link>
-        <RecipeDetailComponent recipe={recipe} />
+        <RecipeDetailComponent recipe={recipe} allRecipes={recipes} />
       </main>
     </div>
   );
