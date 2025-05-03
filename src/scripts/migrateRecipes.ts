@@ -30,10 +30,8 @@ export const migrateRecipes = async () => {
     
     console.log(`Starting migration of ${allRecipes.length} recipes...`);
     
-    // Transform recipes to match database schema and generate UUIDs
+    // Transform recipes to match database schema - let the database generate UUIDs
     const recipesForDb = allRecipes.map(recipe => ({
-      // Generate a UUID for each recipe rather than using the string ID
-      // The database will generate a UUID automatically
       title: recipe.title,
       image: recipe.image,
       ingredients: recipe.ingredients,
@@ -44,8 +42,8 @@ export const migrateRecipes = async () => {
       author: recipe.author || null,
     }));
     
-    // Insert recipes in batches to avoid request size limits
-    const batchSize = 20;
+    // Insert recipes in smaller batches to avoid request size limits
+    const batchSize = 10;
     for (let i = 0; i < recipesForDb.length; i += batchSize) {
       const batch = recipesForDb.slice(i, i + batchSize);
       const { error } = await supabase
@@ -57,7 +55,7 @@ export const migrateRecipes = async () => {
         throw error;
       }
       
-      console.log(`Migrated batch ${i/batchSize + 1} of ${Math.ceil(recipesForDb.length/batchSize)}`);
+      console.log(`Migrated batch ${Math.floor(i/batchSize) + 1} of ${Math.ceil(recipesForDb.length/batchSize)}`);
     }
     
     console.log('Recipe migration complete');

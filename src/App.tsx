@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 // Migration wrapper component
 const AppContent = () => {
   // This will run the migration automatically when the app loads
-  useMigration();
+  const { migrationComplete, migrationInProgress } = useMigration();
   
   return (
     <Routes>
