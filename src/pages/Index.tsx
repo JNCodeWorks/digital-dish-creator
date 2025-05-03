@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import RecipeCard from '@/components/RecipeCard';
 import SearchBar from '@/components/SearchBar';
@@ -11,6 +10,9 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useToast } from '@/hooks/use-toast';
 import { Filter, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+// Fallback image for recipes with missing images
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1556909172-8c2f041fca1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1300&q=80";
 
 const Index: React.FC = () => {
   // State for search and filters
@@ -38,11 +40,13 @@ const Index: React.FC = () => {
         }
         
         if (data) {
-          // Transform the data to match our Recipe type
+          // Transform the data to match our Recipe type and ensure valid images
           const transformedRecipes: Recipe[] = data.map(recipe => ({
             id: recipe.id,
             title: recipe.title,
-            image: recipe.image,
+            image: recipe.image && recipe.image.trim() !== '' 
+              ? recipe.image 
+              : FALLBACK_IMAGE, // Use fallback image if missing
             ingredients: recipe.ingredients,
             steps: recipe.steps,
             cuisine: recipe.cuisine,
@@ -100,7 +104,7 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Banner Section */}
+      {/* Banner Section - After the header */}
       <div className="w-full bg-gradient-to-r from-recipe-dark via-recipe-primary to-orange-400 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1556909172-8c2f041fca1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1300&q=80')] bg-cover bg-center mix-blend-overlay"></div>
         <div className="container py-12 md:py-20 relative z-10">
