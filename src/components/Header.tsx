@@ -6,7 +6,7 @@ import { PlusCircle, UtensilsCrossed } from 'lucide-react';
 
 const Header: React.FC = () => {
   return (
-    <header className="border-b py-5 bg-white shadow-sm sticky top-0 z-10">
+    <header className="border-b py-5 bg-white shadow-sm sticky top-0 z-50">
       <div className="container flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <UtensilsCrossed className="h-7 w-7 text-recipe-primary transition-transform group-hover:rotate-12" />

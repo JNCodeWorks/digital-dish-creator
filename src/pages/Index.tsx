@@ -104,8 +104,8 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Banner Section - After the header */}
-      <div className="w-full bg-gradient-to-r from-recipe-dark via-recipe-primary to-orange-400 relative overflow-hidden">
+      {/* Banner Section - After the header but with a lower z-index */}
+      <div className="w-full bg-gradient-to-r from-recipe-dark via-recipe-primary to-orange-400 relative overflow-hidden z-10">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1556909172-8c2f041fca1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1300&q=80')] bg-cover bg-center mix-blend-overlay"></div>
         <div className="container py-12 md:py-20 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
