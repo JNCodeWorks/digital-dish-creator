@@ -10,6 +10,11 @@ interface ShoppingListButtonProps {
   className?: string;
 }
 
+interface ShoppingListItem {
+  title: string;
+  ingredients: string[];
+}
+
 const ShoppingListButton: React.FC<ShoppingListButtonProps> = ({ recipe, className }) => {
   const { toast } = useToast();
 
@@ -18,7 +23,7 @@ const ShoppingListButton: React.FC<ShoppingListButtonProps> = ({ recipe, classNa
     
     // Get existing shopping list from local storage
     const existingList = localStorage.getItem('shoppingList');
-    let shoppingList: Record<string, string[]> = {};
+    let shoppingList: Record<string, ShoppingListItem> = {};
     
     if (existingList) {
       try {
@@ -30,7 +35,6 @@ const ShoppingListButton: React.FC<ShoppingListButtonProps> = ({ recipe, classNa
     
     // Add recipe ingredients to shopping list
     shoppingList[recipe.id] = {
-      ...shoppingList[recipe.id],
       title: recipe.title,
       ingredients: recipe.ingredients
     };
