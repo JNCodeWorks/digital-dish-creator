@@ -9,20 +9,24 @@ import {
   ShoppingCart
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <header className="border-b py-5 bg-card shadow-sm sticky top-0 z-50">
       <div className="container flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <UtensilsCrossed className="h-7 w-7 text-recipe-primary transition-transform group-hover:rotate-12" />
           <span className="text-3xl font-bold font-playfair text-foreground hover:text-recipe-primary transition-colors">
-            Culinary Collection
+            {!isMobile ? "Culinary Collection" : "CC"}
           </span>
         </Link>
         
         <div className="flex items-center gap-3">
-          <ThemeToggle className="hidden sm:flex" />
+          {/* Make theme toggle visible on all screen sizes */}
+          <ThemeToggle className="flex" />
           
           <Link to="/favorites" className="hidden sm:flex">
             <Button 
@@ -46,8 +50,8 @@ const Header: React.FC = () => {
           
           <Link to="/add-recipe">
             <Button className="bg-recipe-primary hover:bg-recipe-primary/90 text-white font-medium transition-all shadow-md hover:shadow-lg">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add Recipe
+              {!isMobile && <PlusCircle className="mr-2 h-4 w-4" />}
+              {isMobile ? "Add" : "Add Recipe"}
             </Button>
           </Link>
         </div>
