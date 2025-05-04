@@ -6,20 +6,17 @@ import {
   PlusCircle, 
   UtensilsCrossed, 
   BookmarkCheck, 
-  ShoppingCart, 
-  Moon, 
-  Sun
+  ShoppingCart
 } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
 import ThemeToggle from '@/components/ThemeToggle';
 
 const Header: React.FC = () => {
   return (
-    <header className="border-b py-5 bg-white shadow-sm sticky top-0 z-50">
+    <header className="border-b py-5 bg-card shadow-sm sticky top-0 z-50">
       <div className="container flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <UtensilsCrossed className="h-7 w-7 text-recipe-primary transition-transform group-hover:rotate-12" />
-          <span className="text-3xl font-bold font-playfair text-recipe-dark hover:text-recipe-primary transition-colors">
+          <span className="text-3xl font-bold font-playfair text-foreground hover:text-recipe-primary transition-colors">
             Culinary Collection
           </span>
         </Link>
@@ -30,7 +27,7 @@ const Header: React.FC = () => {
           <Link to="/favorites" className="hidden sm:flex">
             <Button 
               variant="ghost" 
-              className="text-recipe-dark hover:text-recipe-primary hover:bg-recipe-muted"
+              className="text-foreground hover:text-recipe-primary hover:bg-accent"
             >
               <BookmarkCheck className="mr-2 h-4 w-4" />
               Favorites
@@ -40,7 +37,7 @@ const Header: React.FC = () => {
           <Link to="/shopping-list" className="hidden sm:flex">
             <Button 
               variant="ghost" 
-              className="text-recipe-dark hover:text-recipe-primary hover:bg-recipe-muted"
+              className="text-foreground hover:text-recipe-primary hover:bg-accent"
             >
               <ShoppingCart className="mr-2 h-4 w-4" />
               Shopping List

@@ -21,7 +21,7 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes, loading }) => {
 
   if (recipes.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 text-center p-8 bg-white rounded-xl border border-recipe-muted">
+      <div className="flex flex-col items-center justify-center h-64 text-center p-8 bg-card rounded-xl border border-border">
         <p className="text-xl font-medium mb-2 font-playfair">No recipes found</p>
         <p className="text-muted-foreground">Try adjusting your search or filters</p>
       </div>

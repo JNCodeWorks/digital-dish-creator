@@ -15,7 +15,7 @@ interface ThemeToggleProps {
 }
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, setTheme } = useTheme();
   
   const getCurrentThemeIcon = () => {
     switch (theme) {
@@ -37,8 +37,17 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => toggleTheme()}>
-          {theme === 'light' ? 'Dark' : theme === 'dark' ? 'System' : 'Light'} theme
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+          <Sun className="h-4 w-4 mr-2" />
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+          <Moon className="h-4 w-4 mr-2" />
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
+          <Monitor className="h-4 w-4 mr-2" />
+          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

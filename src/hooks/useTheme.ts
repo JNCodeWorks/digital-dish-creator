@@ -54,5 +54,5 @@ export const useTheme = () => {
   
   const actualTheme = theme === 'system' ? systemTheme : theme;
   
-  return { theme, actualTheme, toggleTheme };
+  return { theme, actualTheme, toggleTheme, setTheme };
 };
