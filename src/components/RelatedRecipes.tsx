@@ -30,7 +30,7 @@ const RelatedRecipes: React.FC<RelatedRecipesProps> = ({
   if (relatedRecipes.length === 0) return null;
   
   return (
-    <div className={cn('bg-white rounded-xl border border-recipe-muted p-6', className)}>
+    <div className={cn('bg-card rounded-xl border border-border p-6', className)}>
       <h3 className="text-xl font-bold mb-4 font-playfair">You might also like</h3>
       
       <div className="space-y-4">
@@ -38,7 +38,7 @@ const RelatedRecipes: React.FC<RelatedRecipesProps> = ({
           <Link 
             to={`/recipes/${recipe.id}`}
             key={recipe.id}
-            className="flex items-center gap-3 p-2 rounded-lg hover:bg-recipe-muted/20 transition-colors group"
+            className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors group"
           >
             <div className="h-14 w-14 rounded overflow-hidden flex-shrink-0">
               <img 
@@ -49,7 +49,7 @@ const RelatedRecipes: React.FC<RelatedRecipesProps> = ({
             </div>
             
             <div className="flex-grow">
-              <h4 className="font-medium text-recipe-dark group-hover:text-recipe-primary transition-colors">
+              <h4 className="font-medium text-foreground group-hover:text-recipe-primary transition-colors">
                 {recipe.title}
               </h4>
               <p className="text-sm text-muted-foreground">

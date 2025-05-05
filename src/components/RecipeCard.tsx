@@ -22,7 +22,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
   return (
     <Link to={`/recipes/${recipe.id}`} className="group">
-      <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-2 group border-recipe-muted relative">
+      <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-2 group border-border relative">
         {/* Favorite Button - Absolute positioned on the card */}
         <div className="absolute top-3 right-3 z-10">
           <FavoriteButton
@@ -43,7 +43,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="w-full h-full bg-recipe-muted/50 flex flex-col items-center justify-center">
+            <div className="w-full h-full bg-muted flex flex-col items-center justify-center">
               <ImageOff className="h-8 w-8 text-muted-foreground mb-2" />
               <span className="text-sm text-muted-foreground">Image not available</span>
             </div>
@@ -72,12 +72,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           
           <div className="flex flex-wrap gap-2 mt-3">
             {recipe.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="outline" className="bg-recipe-secondary text-recipe-dark border-none transition-colors hover:bg-recipe-secondary/80">
+              <Badge key={tag} variant="outline" className="bg-recipe-secondary/30 text-foreground border-none transition-colors hover:bg-recipe-secondary/50">
                 {tag}
               </Badge>
             ))}
             {recipe.tags.length > 3 && (
-              <Badge variant="outline" className="bg-white border-recipe-muted text-muted-foreground">
+              <Badge variant="outline" className="bg-background border-border text-muted-foreground">
                 +{recipe.tags.length - 3}
               </Badge>
             )}

@@ -44,11 +44,11 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, allRecipes }) => {
           <ShareButton 
             title={recipe.title} 
             recipeId={recipe.id} 
-            className="bg-white/80 backdrop-blur-sm hover:bg-white" 
+            className="bg-white/80 dark:bg-black/40 backdrop-blur-sm hover:bg-white dark:hover:bg-black/60" 
           />
           <PrintButton
             recipe={recipe}
-            className="bg-white/80 backdrop-blur-sm hover:bg-white"
+            className="bg-white/80 dark:bg-black/40 backdrop-blur-sm hover:bg-white dark:hover:bg-black/60"
           />
         </div>
         
@@ -81,7 +81,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, allRecipes }) => {
 
       <div className="grid md:grid-cols-3 gap-8 mb-12">
         <div className="md:col-span-2 space-y-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-recipe-muted">
+          <div className="bg-card p-6 rounded-xl shadow-sm border border-border">
             <div className="flex items-center gap-2 mb-6">
               <UtensilsCrossed className="h-6 w-6 text-recipe-primary" />
               <h2 className="text-2xl font-bold font-playfair">Ingredients</h2>
@@ -95,12 +95,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, allRecipes }) => {
               ))}
             </ul>
             
-            <div className="mt-6 pt-6 border-t border-recipe-muted">
+            <div className="mt-6 pt-6 border-t border-border">
               <ShoppingListButton recipe={recipe} className="w-full md:w-auto" />
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-recipe-muted">
+          <div className="bg-card p-6 rounded-xl shadow-sm border border-border">
             <div className="flex items-center gap-2 mb-6">
               <ChefHat className="h-6 w-6 text-recipe-primary" />
               <h2 className="text-2xl font-bold font-playfair">Instructions</h2>

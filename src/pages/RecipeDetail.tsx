@@ -87,7 +87,7 @@ const RecipeDetailPage: React.FC = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <main className="container py-12">
-          <div className="text-center max-w-md mx-auto bg-white p-8 rounded-xl shadow-md border border-recipe-muted">
+          <div className="text-center max-w-md mx-auto bg-card p-8 rounded-xl shadow-md border border-border">
             <ChefHat className="h-12 w-12 text-recipe-primary mx-auto mb-4 opacity-50" />
             <h1 className="text-2xl font-bold mb-4 font-playfair">Recipe not found</h1>
             <p className="text-muted-foreground mb-6">The recipe you're looking for doesn't seem to exist.</p>
