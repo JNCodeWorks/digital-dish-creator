@@ -63,7 +63,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair text-recipe-dark">Cuisine</h3>
+        <h3 className="text-lg font-semibold mb-3 font-playfair">Cuisine</h3>
         <div className={`space-y-2 ${isMobile ? 'grid grid-cols-2 gap-2 space-y-0' : ''}`}>
           {uniqueCuisines.map(cuisine => (
             <div key={cuisine} className="flex items-center space-x-2 group">
@@ -84,10 +84,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </div>
       </div>
       
-      <Separator className="bg-recipe-muted/50" />
+      <Separator className="bg-muted" />
       
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair text-recipe-dark">Tags</h3>
+        <h3 className="text-lg font-semibold mb-3 font-playfair">Tags</h3>
         <div className={`space-y-2 ${isMobile ? 'grid grid-cols-2 gap-2 space-y-0' : ''}`}>
           {uniqueTags.map(tag => (
             <div key={tag} className="flex items-center space-x-2 group">
@@ -108,10 +108,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </div>
       </div>
       
-      <Separator className="bg-recipe-muted/50" />
+      <Separator className="bg-muted" />
       
       <div>
-        <h3 className="text-lg font-semibold mb-3 font-playfair text-recipe-dark">Prep Time</h3>
+        <h3 className="text-lg font-semibold mb-3 font-playfair">Prep Time</h3>
         <div className="space-y-4 px-2">
           <Slider 
             defaultValue={[maxPrepTime]} 

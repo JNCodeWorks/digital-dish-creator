@@ -92,7 +92,7 @@ const Index: React.FC = () => {
           
           {/* Desktop Filter Panel */}
           {!isMobile && (
-            <aside className="lg:col-span-1 p-6 bg-white rounded-xl shadow-sm border border-recipe-muted sticky top-28 self-start max-h-[calc(100vh-120px)] overflow-y-auto hidden lg:block">
+            <aside className="lg:col-span-1 p-6 bg-card rounded-xl shadow-sm border border-border sticky top-28 self-start max-h-[calc(100vh-120px)] overflow-y-auto hidden lg:block">
               <h2 className="text-xl font-playfair font-semibold mb-6">Filter Recipes</h2>
               <FilterPanel 
                 recipes={recipes}

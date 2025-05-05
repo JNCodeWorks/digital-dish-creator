@@ -9,8 +9,8 @@ interface RecipeBannerProps {
 
 const RecipeBanner: React.FC<RecipeBannerProps> = ({ searchQuery, setSearchQuery }) => {
   return (
-    <div className="w-full  relative overflow-hidden z-10">
-      <div className="absolute inset-0  bg-[url('https://images.unsplash.com/photo-1556911073-a517e752729c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"></div>
+    <div className="w-full relative overflow-hidden z-10">
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556911073-a517e752729c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center after:absolute after:inset-0 after:bg-black/20 dark:after:bg-black/50"></div>
       <div className="container py-12 md:py-20 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white font-playfair drop-shadow-md">
