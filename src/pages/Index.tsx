@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import FilterPanel from '@/components/FilterPanel';
-import RecipeBanner from '@/components/RecipesBanner';
+import RecipeBanner from '@/components/RecipeBanner';
 import RecipeGrid from '@/components/RecipeGrid';
 import PaginationControls from '@/components/Pagination';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
