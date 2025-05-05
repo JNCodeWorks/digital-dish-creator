@@ -6,10 +6,17 @@ import {
   PlusCircle, 
   UtensilsCrossed, 
   BookmarkCheck, 
-  ShoppingCart
+  ShoppingCart,
+  Menu
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header: React.FC = () => {
   const isMobile = useIsMobile();
@@ -28,25 +35,53 @@ const Header: React.FC = () => {
           {/* Make theme toggle visible on all screen sizes */}
           <ThemeToggle className="flex" />
           
-          <Link to="/favorites" className="hidden sm:flex">
-            <Button 
-              variant="ghost" 
-              className="text-foreground hover:text-recipe-primary hover:bg-accent"
-            >
-              <BookmarkCheck className="mr-2 h-4 w-4" />
-              Favorites
-            </Button>
-          </Link>
-          
-          <Link to="/shopping-list" className="hidden sm:flex">
-            <Button 
-              variant="ghost" 
-              className="text-foreground hover:text-recipe-primary hover:bg-accent"
-            >
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Shopping List
-            </Button>
-          </Link>
+          {/* Desktop navigation links */}
+          {!isMobile ? (
+            <>
+              <Link to="/favorites">
+                <Button 
+                  variant="ghost" 
+                  className="text-foreground hover:text-recipe-primary hover:bg-accent"
+                >
+                  <BookmarkCheck className="mr-2 h-4 w-4" />
+                  Favorites
+                </Button>
+              </Link>
+              
+              <Link to="/shopping-list">
+                <Button 
+                  variant="ghost" 
+                  className="text-foreground hover:text-recipe-primary hover:bg-accent"
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  Shopping List
+                </Button>
+              </Link>
+            </>
+          ) : (
+            /* Mobile dropdown menu */
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link to="/favorites" className="flex items-center w-full cursor-pointer">
+                    <BookmarkCheck className="mr-2 h-4 w-4" />
+                    Favorites
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/shopping-list" className="flex items-center w-full cursor-pointer">
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    Shopping List
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
           
           <Link to="/add-recipe">
             <Button className="bg-recipe-primary hover:bg-recipe-primary/90 text-white font-medium transition-all shadow-md hover:shadow-lg">
