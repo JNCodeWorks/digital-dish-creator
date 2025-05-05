@@ -37,12 +37,12 @@ const NutritionInfo: React.FC<NutritionInfoProps> = ({ recipe, className }) => {
   const nutrition = generateMockNutrition(recipe);
   
   return (
-    <div className={`bg-white p-5 rounded-xl border border-recipe-muted ${className}`}>
+    <div className={`bg-card p-5 rounded-xl border border-border ${className}`}>
       <h3 className="text-lg font-semibold mb-3 font-playfair">Estimated Nutrition Facts</h3>
       <p className="text-xs text-muted-foreground mb-4">Values are approximate and per serving</p>
       
       <div className="space-y-3">
-        <div className="flex justify-between border-b pb-2">
+        <div className="flex justify-between border-b border-border pb-2">
           <span className="font-medium">Calories</span>
           <span>{nutrition.calories} kcal</span>
         </div>
@@ -67,7 +67,7 @@ const NutritionInfo: React.FC<NutritionInfoProps> = ({ recipe, className }) => {
           <span>{nutrition.sugar}g</span>
         </div>
         
-        <div className="flex justify-between border-t pt-2">
+        <div className="flex justify-between border-t border-border pt-2">
           <span>Fat</span>
           <span>{nutrition.fat}g</span>
         </div>
