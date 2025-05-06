@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { PlusCircle, Plus, Save } from 'lucide-react';
@@ -17,6 +16,8 @@ import { Recipe } from '@/types/recipe';
 import { useToast } from '@/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { supabase } from '@/integrations/supabase/client';
+import { useNavigate } from 'react-router-dom';
 
 const recipeSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
@@ -32,12 +33,14 @@ type FormValues = z.infer<typeof recipeSchema>;
 
 const AddRecipeForm: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [ingredients, setIngredients] = React.useState<string[]>([]);
   const [steps, setSteps] = React.useState<string[]>([]);
   const [tags, setTags] = React.useState<string[]>([]);
   const [newIngredient, setNewIngredient] = React.useState('');
   const [newStep, setNewStep] = React.useState('');
   const [newTag, setNewTag] = React.useState('');
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(recipeSchema),
@@ -97,14 +100,33 @@ const AddRecipeForm: React.FC = () => {
     data.steps = steps;
     data.tags = tags;
     
+    setIsSubmitting(true);
+    
     try {
-      // This will be replaced with Supabase integration when connected
-      console.log('Recipe to save:', data);
+      // Insert the recipe into Supabase
+      const { data: insertedData, error } = await supabase
+        .from('recipes')
+        .insert({
+          title: data.title,
+          image: data.image,
+          cuisine: data.cuisine,
+          prep_time: data.prepTime,
+          ingredients: data.ingredients,
+          steps: data.steps,
+          tags: data.tags,
+          created_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+      
+      if (error) {
+        throw error;
+      }
       
       // Show success message
       toast({
         title: "Recipe Created",
-        description: "Your recipe has been created successfully. Connect to Supabase to save it permanently.",
+        description: "Your recipe has been saved successfully!",
       });
       
       // Reset form
@@ -112,18 +134,28 @@ const AddRecipeForm: React.FC = () => {
       setIngredients([]);
       setSteps([]);
       setTags([]);
+      
+      // Navigate to the recipe detail page if we have the inserted ID
+      if (insertedData && insertedData.id) {
+        navigate(`/recipes/${insertedData.id}`);
+      } else {
+        // If for some reason we don't have the ID, navigate to the home page
+        navigate('/');
+      }
     } catch (error) {
       console.error('Error saving recipe:', error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "There was a problem saving your recipe."
+        description: "There was a problem saving your recipe. Please try again."
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-recipe-muted">
+    <div className="max-w-3xl mx-auto p-6 bg-card rounded-lg shadow-sm border border-border">
       <h2 className="text-2xl font-bold mb-6 font-playfair">Add New Recipe</h2>
       
       <Form {...form}>
@@ -305,13 +337,29 @@ const AddRecipeForm: React.FC = () => {
             </div>
           </div>
           
-          <Button type="submit" className="w-full bg-recipe-primary hover:bg-recipe-primary/90">
-            <Save className="mr-2 h-4 w-4" />
-            Save Recipe
+          <Button 
+            type="submit" 
+            className="w-full bg-recipe-primary hover:bg-recipe-primary/90"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Saving Recipe...
+              </>
+            ) : (
+              <>
+                <Save className="mr-2 h-4 w-4" />
+                Save Recipe
+              </>
+            )}
           </Button>
           
           <div className="text-center text-sm text-muted-foreground mt-4">
-            <p>Connect to Supabase to permanently save recipes to your database.</p>
+            <p>Your recipe will be saved to Supabase and displayed in the app.</p>
           </div>
         </form>
       </Form>
